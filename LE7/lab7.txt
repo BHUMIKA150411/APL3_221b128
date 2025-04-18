@@ -1,0 +1,26 @@
+#Docker - docker makes a unit (docker image) which can be transferred to other computer.
+Virtual machine can run on application layer and kernel layer
+docker runs only on application layer
+
+#Ways to run Linux on a window machine
+1. uninstall window and install Linux.
+2. install Linux in same part of memory(Partition of memory).
+3. using virtual machine.
+4. using docker.
+#demo
+1. open docker desktop , pull images from docker hub.
+2. docker pull hello-world
+3. docker run hello-world
+4. docker run -it ubuntu
+5. exit
+6. docker stop <id> 
+
+#for two container to talk hasle (mongo ,mongo-express)
+1. docker network ls
+2. docker network create mongo-network
+3. docker network ls
+4. docker run -d -p 27017:27017 --name mongo --network -e MONGO_IN_INITDB_ROOT_USERNAME = admi -e MONGO_IN_INITDB_ROOT_PASSWORD = admin mongo 
+5. docker network inspect mongo-network           //to see containers are connected to mongo network
+6. docker run -d -p 8081:8081 --name mongo-express --network mongo-network -e ME_CONFIG_MONGODB_ADMINUSERNAME = ADMIN -e
+ME_CONFIG_MONGODB_ADMINPASSWORD = admin -e ME_CONFIG_MONGODB_URL = "mongodb://admin:admin@mongo:27017" mongo-express
+7. after running the above commands run https://localhost:8801 in browser 
